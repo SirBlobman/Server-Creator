@@ -3,18 +3,18 @@ md Server>nul
 cd>nul
 cd Server>nul
 cls
-title BlobmanThingy's Minecraft Server Creator
+title SirBlobman's Minecraft Server Creator
 echo Hello and welcome to Blobman's Server creator.
 echo If you would like to start a server please press any key
 pause>nul
 :mainquestion
-set /p serverjar=What type of server would you like? (type B, S, or C) [Type INFO to see information on each] {Do not type any spaces}
+set /p serverjar=What type of server would you like? (type B, S, or K) [Type INFO to see information on each] {Do not type any spaces}
 if %ERRORLEVEL% 1 goto :ErrorNoSpacesAllowed
 if %serverjar%==INFO goto :INFO
-if %serverjar%==Cauldron goto :CAULDRON
-if %serverjar%==C goto :CAULDRON
-if %serverjar%==cauldron goto :CAULDRON
-if %serverjar%==CAULDRON goto :CAULDRON
+if %serverjar%==Thermos goto :THERMOS
+if %serverjar%==thermos goto :THERMOS
+if %serverjar%==THERMOS goto :THERMOS
+if %serverjar%==T goto :Thermos
 if %serverjar%==Bukkit goto :CRAFTBUKKIT
 if %serverjar%==bukkit goto :CRAFTBUKKIT
 if %serverjar%==BUKKIT goto :CRAFTBUKKIT
@@ -28,31 +28,31 @@ if %serverjar%==%serverjar% goto :mainquestion
 
 :INFO
 cls
-echo [1.8] Bukkit allows for plugins (B)
-echo [1.8] Spigot is like bukkit but has performance tweaks (S)
-echo [Forge 1.7.10] Cauldron is the only one that is 1.7.10. It allows you to have Forge, and Spigot at the same time. (C)
+echo [1.8.8] Bukkit allows for plugins (B)
+echo [1.8.8] Spigot is like bukkit but has performance tweaks (S)
+echo [Forge 1.7.10] Thermos is the only one that is 1.7.10. It allows you to have Forge, and Spigot at the same time. (C)
 pause
 goto :mainquestion
 
-:CAULDRON
+:THERMOS
 cls
-echo 1) You must download a file called CAULDRON.
+echo 1) You must download a file called Thermos.
 echo     This file is what makes the server run. 
 echo     If you do not have it then you can't have the server. 
 echo     Download it and make sure you put it in the "Server" folder
 echo     Dont forget to extract the files and put them in the "Server" folder.
-echo     Cauldron is the most complicated one of the three. If you don't know what you are doing, then please dont use it
-echo     Don't forget to rename cauldron.1.7.10.X.X.X.X.X to Server.jar
+echo     Thermos is the most complicated one of the three. If you don't know what you are doing, then please dont use it
+echo     Don't forget to rename Thermos.1.7.10.X.X.X.X.X to Server.jar
 echo     Press any button to download the file!
 pause>nul
 cls
 if exist Server.jar goto :2
 echo Downloading.....
-explorer http://tcpr.ca/files/cauldron/cauldron-1.7.10-1.1307.06.218.zip
+explorer http://tcpr.ca/files/thermos/Thermos-1.7.10-1614.28-server.jar
 echo When you finish downloading the file, press a button to go to the next step
 pause>nul
 cls
-if NOT exist Server.jar goto :errormissingjar
+if NOT exist Server.jar goto :ErrorMissingJar
 if exist Server.jar goto :2
 
 :CRAFTBUKKIT
@@ -67,11 +67,11 @@ pause>nul
 cls
 if exist Server.jar goto :2
 echo Downloading.....
-explorer http://tcpr.ca/files/craftbukkit/craftbukkit-1.8-R0.1-SNAPSHOT-latest.jar
+explorer http://tcpr.ca/files/craftbukkit/craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar
 echo When you finish downloading the file, press a button to go to the next step
 pause>nul
 cls
-if NOT exist Server.jar goto :errormissingjar
+if NOT exist Server.jar goto :ErrorMissingJar
 if exist Server.jar goto :2
 
 
@@ -89,11 +89,11 @@ pause>nul
 cls
 if exist Server.jar goto :2
 echo Downloading.....
-explorer http://tcpr.ca/files/spigot/spigot-1.8-R0.1-SNAPSHOT-latest.jar
+explorer http://tcpr.ca/files/spigot/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar
 echo When you finish downloading the file, press a button to go to the next step
 pause>nul
 cls
-if NOT exist Server.jar goto :errormissingjar
+if NOT exist Server.jar goto :ErrorMissingJar
 if exist Server.jar goto :2
 
 
@@ -106,6 +106,8 @@ echo     If it gets deleted, the server will just reset it
 set /p alreadyhave=Do you already have a "server.properties"? (yes or no)
 if %alreadyhave%==no goto :properties
 if %alreadyhave%==yes goto :plugins
+if %alreadyhave%==%alreadyhave% goto :2
+
 :properties
 pause>nul
 cls
@@ -157,13 +159,6 @@ goto :createproperties
 
 
 
-:errormissingjar
-COLOR 04
-echo An error has occured
-echo ERROR CODE 806
-echo Press any key to exit...
-pause>nul
-exit
 
 
 :createproperties
@@ -223,12 +218,12 @@ goto :doneend
 :downloadess
 echo After you click a button the plugin "essentials" will be downloaded
 echo You must save these in the folder called "plugins" which is inside of "Server"
-echo This is not an official copy of essentials, as it was made by TeamCity. It can only be used with Spigot 1.8
+echo This is not an official copy of essentials, it is EssentialsX which is made for 1.8.3+
+echo Make sure you get what you need.
+ech EssentialsX, EssentialsXChat, and EssentialsXSpawn are the most important
 echo Press any key to start the download...
 pause>nul
-explorer https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastSuccessfulBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
-explorer https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastSuccessfulBuild/artifact/EssentialsChat/target/EssentialsChat-2.x-SNAPSHOT.jar
-explorer https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastSuccessfulBuild/artifact/EssentialsSpawn/target/EssentialsSpawn-2.x-SNAPSHOT.jar
+explorer http://ci.drtshock.net/job/essentialsx/
 echo Press any key to go to the next step...
 pause>nul
 goto :WE
@@ -243,10 +238,9 @@ pause>nul
 :downloadwe
 echo After you press a button, the download of WorldEdit and WorldGuard will begin
 echo Please save these files to the "plugins" folder that is inside of "server"
-echo Remember to extract WorldGuard from its .zip
 pause>nul
-explorer http://dev.bukkit.org/media/files/856/297/worldguard-6.0.0-beta-05.zip
-explorer http://dev.bukkit.org/media/files/837/363/worldedit-bukkit-6.0.jar
+explorer http://dev.bukkit.org/media/files/881/691/worldguard-6.1.jar
+explorer http://dev.bukkit.org/media/files/880/435/worldedit-bukkit-6.1.jar
 echo press any key to go to the next step
 pause>nul
 goto :coreprotect
@@ -262,7 +256,7 @@ pause>nul
 echo after you click a button, "CoreProtect" will be downloaded
 echo dont forget to save it to the "plugins" folder
 pause>nul
-explorer http://dev.bukkit.org/media/files/820/756/CoreProtect_2.10.0.jar
+explorer http://dev.bukkit.org/media/files/886/944/CoreProtect_2.12.0.jar
 echo press any key to go to the next step
 pause>nul
 goto :doneend
@@ -285,5 +279,14 @@ COLOR 04
 echo An error has occured:
 echo ERROR CODE 1
 echo press any key to exit
+pause>nul
+exit
+
+
+:ErrorMissingJar
+COLOR 04
+echo An error has occured
+echo ERROR CODE 2
+echo Press any key to exit...
 pause>nul
 exit
